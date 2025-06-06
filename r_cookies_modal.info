@@ -1,0 +1,7 @@
+name = R Cookies Modal
+description = Cookie 152 ФЗ
+core = 7.x
+package = RusVAn
+configure = admin/config/cookies-modal
+php = 7.2
+version = 1.0

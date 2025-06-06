@@ -1,0 +1,118 @@
+@keyframes cookieAppearBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100%)
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0)
+  }
+}
+#cookie_note {
+  opacity: 0;
+  display: none;
+  position: fixed;
+  z-index: 100;
+  right: 25px;
+  bottom: 40px;
+  //max-width: 315px;
+  max-width: 425px;
+  width: 100%;
+  background-color: #fff;
+  color: #111;
+  font-family: 'Onest-400', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.14px;
+  padding: 20px;
+  border-radius: 20px;
+  -webkit-box-shadow: 0px 0px 11px 5px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 0px 11px 5px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 0px 11px 5px rgba(34, 60, 80, 0.2);
+
+  animation: cookieAppearBottom .4s ease-in-out forwards;
+  animation-delay: 3s;
+
+  p {
+    color: #111;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.14px;
+    padding-bottom: 20px;
+  }
+
+  .cookie_accept,
+  .cookie_deny {
+    color: #fff;
+    display: inline;
+    //padding: 10px 20px;
+    padding: 13px 20px;
+    justify-content: center;
+    align-items: center;
+    //border-radius: 200px;
+    border-radius: 8px;
+    background: #111;
+    cursor: pointer;
+    max-width: 90px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0.14px;
+    margin: 0;
+    white-space: nowrap;
+
+    &:hover {
+      -webkit-box-shadow: 0px 0px 11px 5px rgba(171, 171, 171, 0.3);
+      -moz-box-shadow: 0px 0px 11px 5px rgba(171, 171, 171, 0.3);
+      box-shadow: 0px 0px 11px 5px rgba(171, 171, 171, 0.3);
+      transition: 0.3s;
+    }
+  }
+  .cookie_deny,
+  .cookie_accept {
+    width: 20%;
+  }
+  .cookie_deny {
+    margin-left: 15px;
+    display: none;
+  }
+
+  a {
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  #cookie_note.show {
+    display: block;
+  }
+}
+
+@media (max-width: 575px) {
+  #cookie_note.show {
+    //display: none;
+    //text-align: left;
+    position: fixed;
+    z-index: 100;
+    right: 0;
+    bottom: 0;
+    max-width: 100%;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+
+    .cookie_accept {
+      line-height: 20px;
+
+    }
+  }
+}
+

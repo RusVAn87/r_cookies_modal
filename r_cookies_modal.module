@@ -1,0 +1,94 @@
+<?php
+/*
+ * 1. https://tilda.cc/ru/privacy-generator/ - Конструктор политики обработки персональных данных
+ * 2. https://docs.google.com/document/d/1S3BWelBgWtYTwXefoTxUH8b6yCFkMEp6xLBDIXdsAu4/edit?tab=t.0#heading=h.y0q9mj9bjhz - чек лист
+ * 3. https://pd.rkn.gov.ru/operators-registry/notification/form/ - РКН
+ */
+/**
+ * Implements hook_menu().
+ */
+function r_cookies_modal_menu()
+{
+  $items = [];
+
+  $items['admin/config/cookies-modal'] = [
+    'title' => 'Настройка Cookies Modal - 152 ФЗ',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['r_cookies_modal_form'],
+    'access arguments' => ['administer r_cookies_modal'],
+  ];
+  return $items;
+}
+
+function r_cookies_modal_permission()
+{
+  return [
+    'administer r_cookies_modal' => [
+      'title' => 'Доступ к r_cookies_modal',
+    ],
+  ];
+}
+
+function r_cookies_modal_form($form, &$form_state)
+{
+  $form['markup'] = [
+    '#markup' => 'Конструктор политики обработки персональных данных: <a href="https://tilda.cc/ru/privacy-generator/" target="_blank">https://tilda.cc/ru/privacy-generator/</a>',
+  ];
+  $form['r_cookies_modal_node'] = [
+    '#type' => 'textfield',
+    '#title' => 'node/$nid - с политикой обработки персональных данных',
+    '#default_value' => variable_get('r_cookies_modal_node', '<front>'),
+    '#description' => l('Текущая ссылка на политику обработки персональных данных', variable_get('r_cookies_modal_node', '<front>')) . ',<br/>
+<b>Пример ссылки:</b> node/1',
+  ];
+  $form['r_cookies_modal_cookies'] = [
+    '#type' => 'textfield',
+    '#title' => 'node/$nid - с Политикой использования cookies',
+    '#default_value' => variable_get('r_cookies_modal_cookies', '<front>'),
+    '#description' => l('Политика использования cookies', variable_get('r_cookies_modal_cookies', '<front>')) . ',<br/>
+<b>Пример ссылки:</b> node/1',
+  ];
+
+
+  return system_settings_form($form);
+}
+
+
+/**
+ * Implements hook_block_info().
+ */
+function r_cookies_modal_block_info()
+{
+  $blocks['r_cookies_modal_block'] = [
+    'info' => t('Cookies modal block'), // Название блока в `admin/structure/block`
+  ];
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function r_cookies_modal_block_view($delta = '')
+{
+  $block = [];
+
+  if ($delta == 'r_cookies_modal_block') {
+    drupal_add_css(drupal_get_path('module', 'r_cookies_modal') . '/css/r_cookies_modal.less');
+    drupal_add_js(drupal_get_path('module', 'r_cookies_modal') . '/js/r_cookies_modal.js');
+
+    $block['subject'] = ''; // Заголовок блока (можно оставить пустым)
+    $block['content'] = [
+      '#markup' => '<noindex>
+<div id="cookie_note">
+    <p>Мы используем cookie-файлы для улучшения работы сайта. Продолжая использовать сайт, вы соглашаетесь с ' .
+        l('политикой  использования cookies', variable_get('r_cookies_modal_cookies', '<front>'), ['html' => true, 'attributes' => ['target' => '_blank']])
+        . ' и ' . l('защитой данных', variable_get('r_cookies_modal_node', '<front>'), ['html' => true, 'attributes' => ['target' => '_blank']]) . '.</p>
+    <span class="cookie_accept">Принять</span>
+    <span class="cookie_deny">Отклонить</span>
+</div>
+</noindex>',
+    ];
+  }
+
+  return $block;
+}
