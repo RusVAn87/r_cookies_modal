@@ -99,7 +99,7 @@
 
 @media (max-width: 575px) {
   #cookie_note.show {
-    //display: none;
+    display: block;
     //text-align: left;
     position: fixed;
     z-index: 100;
@@ -117,4 +117,18 @@
 }
 .table-overflow {
   overflow: auto;
+}
+
+
+/**
+Forms
+ */
+.r-cookies {
+  &__link {
+    text-decoration: underline;
+    color: #fff;
+    &:hover{
+      text-decoration: none;
+    }
+  }
 }
