@@ -47,7 +47,7 @@ function r_cookies_modal_form($form, &$form_state) {
   $form['r_cookies_personal_data_processing_policy_consent'] = [
     '#type' => 'textfield',
     '#title' => 'node/$nid - Согласие на обработку персональных данных',
-    '#default_value' => variable_get('r_cookies_personal_data_processing_policy', '<front>'),
+    '#default_value' => variable_get('r_cookies_personal_data_processing_policy_consent', '<front>'),
     '#description' => l('Текущая ссылка на Согласие обработки персональных данных', variable_get('r_cookies_personal_data_processing_policy_consent', '<front>')) . ',<br/>
 <b>Пример ссылки:</b> node/1',
   ];
@@ -68,7 +68,7 @@ function r_cookies_modal_form($form, &$form_state) {
     '#type' => 'textfield',
     '#title' => 'node/$nid - Согласие на получение рекламной и информационной рассылки',
     '#default_value' => variable_get('r_cookies_advertising_newsletter', '<front>'),
-    '#description' => l('Согласие на получение рекламной и информационной рассылки', variable_get('r_cookies_modal_cookies', '<front>')) . ',<br/>
+    '#description' => l('Согласие на получение рекламной и информационной рассылки', variable_get('r_cookies_advertising_newsletter', '<front>')) . ',<br/>
 <b>Пример ссылки:</b> node/1',
   ];
 
